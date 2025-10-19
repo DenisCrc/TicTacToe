@@ -1,3 +1,4 @@
+import random
 def create_board():
     """Create and return a 3x3 Tic-Tac-Toe board."""
     board = [
@@ -54,3 +55,56 @@ def draw_check(board):
                 return 0
     return 1
 
+def aimove(board,curentp):
+    empty=[]
+    for i in range(3):
+        for j in range(3):
+            if board[i][j] == ' ':
+                empty.append((i,j))
+    if empty:
+        r,c= random.choice(empty)
+        if curentp==1:
+            board[r][c]='X'
+        else:
+            board[r][c]='O'
+
+def playgame():
+    board=create_board()
+    print("Do you want to be player 1(X) or player 2(O)?")
+    p=int(input())
+    while True:
+        curentp=1
+        if p==curentp==1:
+            player_move(board,curentp)
+            print_board(board)
+            curentp=2
+        else:
+            print("AI is thinking...")
+            aimove(board,curentp)
+            print_board(board)
+            curentp=2
+        w=win_check(board)
+        if w!=0:
+            print(w," WON")
+            break
+        d=draw_check(board)
+        if d==1:
+            print("DRAW")
+        if p==curentp==2:
+            player_move(board,curentp)
+            print_board(board)
+            curentp=1
+        else:
+            print("AI is thinking...")
+            aimove(board,curentp)
+            print_board(board)
+            curentp=1
+        w=win_check(board)
+        if w!=0:
+            print(w," WON")
+            break
+        d=draw_check(board)
+        if d==1:
+            print("DRAW")
+
+playgame()
