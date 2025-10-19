@@ -101,7 +101,6 @@ def playgame():
 
     while True:
         print_board(board)
-
         if (currentp == p):
             print(f"Your turn ({'X' if currentp == 1 else 'O'}):")
             player_move(board, currentp)
@@ -118,7 +117,7 @@ def playgame():
             break
         if draw_check(board) == 1:
             print_board(board)
-            print("It's a draw! 🤝")
+            print("It's a draw!")
             break
         currentp = 2 if currentp == 1 else 1
 playgame()
