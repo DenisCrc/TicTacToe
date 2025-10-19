@@ -8,7 +8,7 @@ This project provides a command-line Tic-Tac-Toe implementation that supports bo
 - Two AI skill levels:
   - Random
   - Optimal:
-  - 
+
 ## How to Play
 1. Run the game:
    ```bash
