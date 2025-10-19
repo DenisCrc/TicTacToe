@@ -58,6 +58,7 @@ def draw_check(board):
 def aimove(board, curentp):
     ai_symbol = 'O' if curentp == 2 else 'X'
     player_symbol = 'X' if ai_symbol == 'O' else 'O'
+
     empty = [(i, j) for i in range(3) for j in range(3) if board[i][j] == ' ']
 
     for r, c in empty:
@@ -65,14 +66,16 @@ def aimove(board, curentp):
         if win_check(board) == ai_symbol:
             print(f"AI places {ai_symbol} at ({r}, {c})")
             return
-        board[r][c] = ' '  
+        board[r][c] = ' ' 
+
     for r, c in empty:
         board[r][c] = player_symbol
         if win_check(board) == player_symbol:
             board[r][c] = ai_symbol
             print(f"AI places {ai_symbol} at ({r}, {c})")
             return
-        board[r][c] = ' '  
+        board[r][c] = ' ' 
+
     if board[1][1] == ' ':
         board[1][1] = ai_symbol
         print(f"AI places {ai_symbol}")
@@ -102,10 +105,9 @@ def playgame():
         if (currentp == p):
             print(f"Your turn ({'X' if currentp == 1 else 'O'}):")
             player_move(board, currentp)
-        else:
+        else: 
             print("AI is thinking...")
             aimove(board, currentp)
-
         w = win_check(board)
         if w != 0:
             print_board(board)
@@ -114,51 +116,9 @@ def playgame():
             else:
                 print("AI wins!")
             break
-
         if draw_check(board) == 1:
             print_board(board)
-            print("It's a draw!")
+            print("It's a draw! 🤝")
             break
-
         currentp = 2 if currentp == 1 else 1
-
-    board=create_board()
-    print("Do you want to be player 1(X) or player 2(O)?")
-    p=int(input())
-    while True:
-        curentp=1
-        if p==curentp==1:
-            player_move(board,curentp)
-            print_board(board)
-            curentp=2
-        else:
-            print("AI is thinking...")
-            aimove(board,curentp)
-            print_board(board)
-            curentp=2
-        w=win_check(board)
-        if w!=0:
-            print(w," WON")
-            break
-        d=draw_check(board)
-        if d==1:
-            print("DRAW")
-        if p==curentp==2:
-            player_move(board,curentp)
-            print_board(board)
-            curentp=1
-        else:
-            print("AI is thinking...")
-            aimove(board,curentp)
-            print_board(board)
-            curentp=1
-        w=win_check(board)
-        if w!=0:
-            print(w," WON")
-            break
-        d=draw_check(board)
-        if d==1:
-            print("DRAW")
-
-
 playgame()
