@@ -55,18 +55,39 @@ def draw_check(board):
                 return 0
     return 1
 
-def aimove(board,curentp):
-    empty=[]
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == ' ':
-                empty.append((i,j))
+def aimove(board, curentp):
+    ai_symbol = 'O' if curentp == 2 else 'X'
+    player_symbol = 'X' if ai_symbol == 'O' else 'O'
+    empty = [(i, j) for i in range(3) for j in range(3) if board[i][j] == ' ']
+
+    for r, c in empty:
+        board[r][c] = ai_symbol
+        if win_check(board) == ai_symbol:
+            print(f"AI places {ai_symbol} at ({r}, {c})")
+            return
+        board[r][c] = ' '  
+    for r, c in empty:
+        board[r][c] = player_symbol
+        if win_check(board) == player_symbol:
+            board[r][c] = ai_symbol
+            print(f"AI places {ai_symbol} at ({r}, {c})")
+            return
+        board[r][c] = ' '  
+    if board[1][1] == ' ':
+        board[1][1] = ai_symbol
+        print(f"AI places {ai_symbol}")
+        return
+
+    for r, c in [(0,0), (0,2), (2,0), (2,2)]:
+        if board[r][c] == ' ':
+            board[r][c] = ai_symbol
+            print(f"AI places {ai_symbol}")
+            return
+
     if empty:
-        r,c= random.choice(empty)
-        if curentp==1:
-            board[r][c]='X'
-        else:
-            board[r][c]='O'
+        r, c = random.choice(empty)
+        board[r][c] = ai_symbol
+        print(f"AI places {ai_symbol}")
 
 def playgame():
     board = create_board()
@@ -138,38 +159,6 @@ def playgame():
         d=draw_check(board)
         if d==1:
             print("DRAW")
-def aimove(board, curentp):
-    ai_symbol = 'O' if curentp == 2 else 'X'
-    player_symbol = 'X' if ai_symbol == 'O' else 'O'
-    empty = [(i, j) for i in range(3) for j in range(3) if board[i][j] == ' ']
 
-    for r, c in empty:
-        board[r][c] = ai_symbol
-        if win_check(board) == ai_symbol:
-            print(f"AI places {ai_symbol} at ({r}, {c})")
-            return
-        board[r][c] = ' '  
-    for r, c in empty:
-        board[r][c] = player_symbol
-        if win_check(board) == player_symbol:
-            board[r][c] = ai_symbol
-            print(f"AI places {ai_symbol} at ({r}, {c})")
-            return
-        board[r][c] = ' '  
-    if board[1][1] == ' ':
-        board[1][1] = ai_symbol
-        print(f"AI places {ai_symbol}")
-        return
-
-    for r, c in [(0,0), (0,2), (2,0), (2,2)]:
-        if board[r][c] == ' ':
-            board[r][c] = ai_symbol
-            print(f"AI places {ai_symbol}")
-            return
-
-    if empty:
-        r, c = random.choice(empty)
-        board[r][c] = ai_symbol
-        print(f"AI places {ai_symbol}")
 
 playgame()
