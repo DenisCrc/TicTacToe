@@ -18,4 +18,4 @@ This project provides a command-line Tic-Tac-Toe implementation that supports bo
 
 3. Enter moves as two numbers separated by a space (row and column, both 0-2).
 
-Enjoy exploring the contrast between casual and optimal Tic-Tac-Toe play!*** End Patch
+Enjoy exploring the contrast between casual and optimal Tic-Tac-Toe play!
